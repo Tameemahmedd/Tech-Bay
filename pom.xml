@@ -40,6 +40,7 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
+			<version>1.18.30</version>
 			<optional>true</optional>
 		</dependency>
 		<dependency>
@@ -90,16 +91,6 @@
 
 
 	</dependencies>
-
-	<distributionManagement>
-		<repository>
-			<uniqueVersion>false</uniqueVersion>
-			<id>corp1</id>
-			<name>Local Repository</name>
-			<url>https://railway.app/project/be87fa13-d3ad-4f85-b8d0-d3ad349cb49f</url>
-			<layout>default</layout>
-		</repository>
-	</distributionManagement>
 
 	<build>
 		<plugins>
