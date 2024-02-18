@@ -18,7 +18,6 @@ public class CategoryDto {
     @NotBlank
     @Size(min=3,max = 100,message = "Title must be of 3 chars")
     private String title;
-
     @NotBlank(message = "Description Required.")
     private String description;
 

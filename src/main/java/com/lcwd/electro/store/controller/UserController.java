@@ -5,6 +5,7 @@ import com.lcwd.electro.store.dto.ImageResponse;
 import com.lcwd.electro.store.dto.PageableResponse;
 import com.lcwd.electro.store.dto.userDto;
 import com.lcwd.electro.store.services.FileService;
+import com.lcwd.electro.store.services.UserService;
 import com.lcwd.electro.store.services.implementation.UserServiceImpl;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -33,7 +34,7 @@ import java.util.List;
 @Api(value = "UserController",description = "This is user REST APIs.")
 public class UserController {
     @Autowired
-    private UserServiceImpl userService;
+    private UserService userService;
     @Autowired
     private FileService fileService;
 
