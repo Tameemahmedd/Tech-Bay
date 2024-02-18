@@ -6,11 +6,12 @@ import com.lcwd.electro.store.dto.PageableResponse;
 import com.lcwd.electro.store.dto.userDto;
 import com.lcwd.electro.store.services.FileService;
 import com.lcwd.electro.store.services.UserService;
-import com.lcwd.electro.store.services.implementation.UserServiceImpl;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -21,8 +22,8 @@ import org.springframework.util.StreamUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -31,7 +32,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/users")
 @Slf4j
-@Api(value = "UserController",description = "This is user REST APIs.")
+@SecurityRequirement(name="scheme1")
+@Tag(name = "UserController",description = "This is user REST APIs.")
 public class UserController {
     @Autowired
     private UserService userService;
@@ -41,11 +43,11 @@ public class UserController {
 @Value("${user.profile.image.path}")
     private String imageUploadPath;
 @PostMapping
-@ApiOperation(value = "Create new user.")
-@ApiResponses(value = {
-        @ApiResponse(code=200,message = "Success | OK"),
-        @ApiResponse(code=401,message = "Not Authorized"),
-        @ApiResponse(code=201,message = "New user created.")
+@Operation(summary = "Create new user.")
+@ApiResponses (value = {
+        @ApiResponse(responseCode = "200",description  = "Success | OK"),
+        @ApiResponse(responseCode = "401",description  = "Not Authorized"),
+        @ApiResponse(responseCode = "201",description  = "New user created.")
 })
     public ResponseEntity<userDto> createUser(@RequestBody @Valid userDto userDto){
         userDto user = userService.createUser(userDto);
@@ -64,7 +66,7 @@ public ResponseEntity<ApiResponseMessage> deleteUser(@PathVariable("userId") Str
         return new ResponseEntity<>(deleted,HttpStatus.OK);
 }
 @GetMapping
-@ApiOperation(value="Get all Users",tags = {"user-controller","user apis"})
+@Operation(summary="Get all Users")
 public ResponseEntity<PageableResponse<userDto>> getAllUsers(
         @RequestParam(value = "pageNumber",defaultValue = "0",required = false) Integer pageNumber,
         @RequestParam(value = "pageSize",defaultValue = "10",required =false) Integer pageSize,
@@ -74,7 +76,7 @@ public ResponseEntity<PageableResponse<userDto>> getAllUsers(
     return new ResponseEntity<>( userService.getAllUsers(pageNumber,pageSize,sortBy,sortDir),HttpStatus.OK);
 }
     @GetMapping("/{userId}")
-    @ApiOperation(value = "Get single user by userId.")
+    @Operation(summary = "Get single user by userId.")
 public ResponseEntity<userDto> getSingleUser(@PathVariable String userId){
     return new ResponseEntity<>(userService.getSingleUser(userId),HttpStatus.OK );
     }

@@ -5,8 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
-import javax.persistence.criteria.Fetch;
+import jakarta.persistence.*;
+import jakarta.persistence.criteria.Fetch;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;

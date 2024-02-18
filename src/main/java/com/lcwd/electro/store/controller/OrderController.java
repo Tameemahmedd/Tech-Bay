@@ -2,23 +2,25 @@ package com.lcwd.electro.store.controller;
 
 import com.lcwd.electro.store.dto.*;
 import com.lcwd.electro.store.services.OrderService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @RestController
 @RequestMapping("/orders")
+@SecurityRequirement(name="scheme1")
 public class OrderController {
     @Autowired
     private OrderService orderService;
 
     @PostMapping
-    public ResponseEntity<OrderDto> createOrder(@Valid  @RequestBody CreateOrderRequest createOrderRequest){
+    public ResponseEntity<OrderDto> createOrder(@Valid @RequestBody CreateOrderRequest createOrderRequest){
         OrderDto dto = orderService.createOrder(createOrderRequest);
         return new ResponseEntity<>(dto, HttpStatus.CREATED);
     }

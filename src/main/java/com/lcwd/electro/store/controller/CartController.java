@@ -4,6 +4,7 @@ import com.lcwd.electro.store.dto.AddItemtoCartRequest;
 import com.lcwd.electro.store.dto.ApiResponseMessage;
 import com.lcwd.electro.store.dto.CartDto;
 import com.lcwd.electro.store.services.CartService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/carts")
+@SecurityRequirement(name="scheme1")
 public class CartController {
     @Autowired
     private CartService cartService;

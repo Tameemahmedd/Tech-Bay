@@ -11,7 +11,9 @@ import com.lcwd.electro.store.entities.User;
 import com.lcwd.electro.store.exceptions.BadApiRequestException;
 import com.lcwd.electro.store.security.JwtHelper;
 import com.lcwd.electro.store.services.UserService;
-import io.swagger.annotations.Api;
+
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,7 +38,9 @@ import java.util.Map;
 @RequestMapping("/auth")
 //@CrossOrigin(origins = "http://localhost:4200",allowedHeaders = {"Authorization"},methods = {RequestMethod.GET,RequestMethod.POST},
 //maxAge = 3600)
-@Api(value = "AuthenticationController",description = "API for authentication.")
+
+@Tag(name = "AuthenticationController",description = "API for authentication.")
+@SecurityRequirement(name="scheme1")
 public class AuthController {
     @Value("${googleClientId}")
     private String googleClientId;
